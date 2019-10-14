@@ -4,22 +4,33 @@ using UnityEngine;
 
 public class Player : MovableObject
 {
-    Rigidbody2D rb;
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
     private void Update()
     {
-        Vector3 move = Vector3.zero;
-        move += new Vector3(Input.GetAxis("Horizontal"), 0, 0);
-        transform.position += move * speed * Time.deltaTime;
+        velocity = Vector3.zero;
+        PlayerInput();
+        transform.position += velocity * speed * Time.deltaTime;
+    }
 
-        if(Input.GetButtonDown("Jump"))
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        PlayerInteractable pi = collision.gameObject.GetComponent<PlayerInteractable>();
+        if (pi)
         {
-            rb.AddForce(new Vector2(0, 50f), ForceMode2D.Impulse);
+            pi.OnHit(collision, this);
         }
+    }
+
+    void PlayerInput()
+    {
+        velocity += new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+        if (Input.GetButtonDown("Jump"))
+        {
+            Jump();
+        }
+    }
+    void Jump()
+    {
+        rb.velocity = Vector2.zero;
+        rb.AddForce(new Vector2(0, 50f), ForceMode2D.Impulse);
     }
 }

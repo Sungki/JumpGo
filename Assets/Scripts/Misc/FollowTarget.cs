@@ -9,7 +9,10 @@ public class FollowTarget : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, target.transform.position, damping * Time.deltaTime);
-        transform.position = new Vector3(transform.position.x, 0, -10);
+        if(target)
+        {
+            transform.position = Vector3.Lerp(transform.position, target.transform.position, damping * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, 0, -10);
+        }
     }
 }

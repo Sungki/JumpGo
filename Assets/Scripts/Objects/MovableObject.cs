@@ -2,9 +2,12 @@
 
 public class MovableObject : MonoBehaviour
 {
-    public float speed = 5f;
+    protected float speed = 5f;
+    protected Vector3 velocity = Vector3.zero;
+    protected Rigidbody2D rb;
 
-    void Update()
+    private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
     }
 }
