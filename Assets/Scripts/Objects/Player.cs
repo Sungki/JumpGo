@@ -27,6 +27,8 @@ public class Player : MovableObject
         {
             Jump();
         }
+
+        if (Input.GetKey("escape")) Application.Quit();
     }
     void Jump()
     {
