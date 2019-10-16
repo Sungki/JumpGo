@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     private SceneState currentState = 0;
 
-    private void Start()
+    private void Awake()
     {
         Init();
     }

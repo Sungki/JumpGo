@@ -6,5 +6,6 @@ public class Goal : PlayerInteractable
 {
     public override void OnHit(Collision2D hit, Player player)
     {
+        Toolbox.GetInstance().GetManager<LevelManager>().NextLevel();
     }
 }

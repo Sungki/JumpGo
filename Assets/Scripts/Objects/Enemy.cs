@@ -11,12 +11,13 @@ public class Enemy : MovableObject, IFSM
         attack
     }
 
-    private State curr = State.patrol;
+    [SerializeField] private State curr = State.patrol;
     private float TimeLeft = 1.0f;
     private float nextTime = 0.0f;
     private float movementAI = 0;
+    protected Vector3 target = Vector3.zero;
 
-    GameObject player;
+    protected GameObject player;
 
     void Awake()
     {
@@ -46,7 +47,7 @@ public class Enemy : MovableObject, IFSM
         transform.position += velocity * speed * Time.deltaTime;
     }
 
-    void SetState(State next)
+    protected void SetState(State next)
     {
         curr = next;
     }
@@ -67,13 +68,13 @@ public class Enemy : MovableObject, IFSM
     {
         MovementAI();
 
-        if (player && (Vector2.Distance(player.transform.position, transform.position) < 2f))
+        if (player && (Vector2.Distance(player.transform.position, transform.position) < 4f))
             SetState(State.chase);
     }
 
     public void Chase()
     {
-        if(player)
+        if (player)
         {
             if (Vector2.Distance(player.transform.position, transform.position) > 4f)
                 SetState(State.patrol);
@@ -81,11 +82,16 @@ public class Enemy : MovableObject, IFSM
             velocity = player.transform.position - transform.position;
             velocity.y = 0f;
             velocity.z = 0f;
+
+            if (Vector2.Distance(player.transform.position, transform.position) < 2f)
+            {
+                target = player.transform.position;
+                SetState(State.attack);
+            }
         }
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
-
     }
 }

@@ -6,5 +6,6 @@ public class GetSpeedUp : PlayerInteractable
 {
     public override void OnHit(Collision2D hit, Player player)
     {
+        Destroy(this.gameObject);
     }
 }
