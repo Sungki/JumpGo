@@ -26,4 +26,9 @@ public class LevelManager : MonoBehaviour
         }
         SceneManager.LoadScene(currentState.ToString());
     }
+
+    public void GotoEndScreen()
+    {
+        SceneManager.LoadScene("EndScreen");
+    }
 }

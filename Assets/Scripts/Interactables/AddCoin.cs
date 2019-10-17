@@ -6,6 +6,7 @@ public class AddCoin : PlayerInteractable
 {
     public override void OnHit(Collision2D hit, Player player)
     {
+        Toolbox.GetInstance().GetManager<StatManager>().AddCoin();
         Destroy(this.gameObject);
     }
 }
