@@ -15,6 +15,15 @@ public class StatManager : MonoBehaviour
         allDied = false;
     }
 
+    public string GetPlayerLife()
+    {
+        return "Player: " + playerLife.ToString();
+    }
+
+    public string GetScore()
+    {
+        return "Score: " + playerCoin.ToString();
+    }
 
     public void ReduceLife()
     {
@@ -49,7 +58,7 @@ public class StatManager : MonoBehaviour
             }
             if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 + 150, 300, 100), "Do you want to end?"))
             {
-                transform.parent.GetComponentInChildren<LevelManager>().GotoEndScreen();
+                transform.parent.GetComponentInChildren<LevelManager>().GotoScreen("EndScreen");
             }
         }
     }

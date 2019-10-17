@@ -27,8 +27,13 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(currentState.ToString());
     }
 
-    public void GotoEndScreen()
+    public void CurrentScreen()
     {
-        SceneManager.LoadScene("EndScreen");
+        SceneManager.LoadScene(currentState.ToString());
+    }
+
+    public void GotoScreen(string screen)
+    {
+        SceneManager.LoadScene(screen);
     }
 }
