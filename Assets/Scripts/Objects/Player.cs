@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class Player : MovableObject
 {
+    Rigidbody2D rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     private void Update()
     {
         velocity = Vector3.zero;
         PlayerInput();
+    }
+    private void FixedUpdate()
+    {
         transform.position += velocity * speed * Time.deltaTime;
     }
 
@@ -23,11 +33,8 @@ public class Player : MovableObject
     void PlayerInput()
     {
         velocity += new Vector3(Input.GetAxis("Horizontal"), 0, 0);
-        if (Input.GetButtonDown("Jump"))
-        {
-            Jump();
-        }
 
+        if (Input.GetButtonDown("Jump")) Jump();
         if (Input.GetKey("escape")) Application.Quit();
     }
     void Jump()

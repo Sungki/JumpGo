@@ -14,14 +14,16 @@ public class Enemy : MovableObject, IFSM
     [SerializeField] private State curr = State.patrol;
     private float TimeLeft = 1.0f;
     private float nextTime = 0.0f;
-    private float movementAI = 0;
+    protected float movementAI = 0;
     protected Vector3 target = Vector3.zero;
 
     protected GameObject player;
+    protected Rigidbody2D rb;
 
     void Awake()
     {
         player = GameObject.Find("Player");
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -91,7 +93,5 @@ public class Enemy : MovableObject, IFSM
         }
     }
 
-    public virtual void Attack()
-    {
-    }
+    public virtual void Attack() {}
 }
