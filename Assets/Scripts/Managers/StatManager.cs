@@ -8,6 +8,11 @@ public class StatManager : MonoBehaviour
     private int playerCoin = 0;
     private bool allDied = false;
 
+    private void Awake()
+    {
+        Init();
+    }
+
     private void Init()
     {
         playerLife = 3;

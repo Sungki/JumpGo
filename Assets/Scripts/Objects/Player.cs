@@ -6,6 +6,7 @@ public class Player : MovableObject
 {
     Rigidbody2D rb;
     public float speedUp = 1;
+    private int jumpCount = 0;
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class Player : MovableObject
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        jumpCount = 0;
         PlayerInteractable pi = collision.gameObject.GetComponent<PlayerInteractable>();
         if (pi)
         {
@@ -37,18 +39,21 @@ public class Player : MovableObject
         velocity += new Vector3(Input.GetAxis("Horizontal"), 0, 0);
 
         if (Input.GetButtonDown("Jump")) Jump();
-        if (Input.GetKey("escape")) Application.Quit();
     }
     void Jump()
     {
-        transform.parent = null;
-        rb.velocity = Vector2.zero;
-        rb.AddForce(new Vector2(0, 50f), ForceMode2D.Impulse);
+        if (jumpCount <= 1)
+        {
+            jumpCount++;
+            transform.parent = null;
+            rb.velocity = Vector2.zero;
+            rb.AddForce(new Vector2(0, 50f), ForceMode2D.Impulse);
+        }
     }
 
-    public void SpeedUp(float up)
+    public void SpeedUp(float speed)
     {
-        speedUp = up;
+        speedUp = speed;
         Invoke("RemoveSpeedUp", 5.0f);
     }
 

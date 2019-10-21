@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
 
     public void NextLevel()
     {
-        if (currentState == SceneState.SummaryScreen) Init();
+        if (currentState == SceneState.EndScreen) Init();
         else
         {
             currentState++;
