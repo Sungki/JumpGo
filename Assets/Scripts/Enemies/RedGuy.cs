@@ -23,6 +23,6 @@ public class RedGuy : Enemy
         transform.position = Vector3.Lerp(transform.position, target, 3 * Time.deltaTime);
         transform.position = new Vector3(transform.position.x, temp.y, temp.z);
 
-        if (transform.position.x == target.x) SetState(State.patrol);
+        if (Mathf.Abs(transform.position.x - target.x) <= 0.2f) SetState(State.patrol);
     }
 }

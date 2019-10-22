@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public GameObject player;
     private Text[] textArray;
     private GameObject myCanvas;
+    private bool isPause = false;
 
     private void Awake()
     {
@@ -40,16 +41,50 @@ public class GameManager : MonoBehaviour
         textArray[1].text = transform.parent.GetComponentInChildren<StatManager>().GetScore();
     }
 
+    public void ShowSummary()
+    {
+        textArray[0].transform.position = new Vector2(Screen.width / 2 - 100, Screen.height - 300);
+        textArray[1].transform.position = new Vector2(Screen.width / 2 + 250, Screen.height - 300);
+
+        textArray[0].text = transform.parent.GetComponentInChildren<StatManager>().GetPlayerLife();
+        textArray[1].text = transform.parent.GetComponentInChildren<StatManager>().GetScore();
+    }
+
     public void InitText()
     {
         textArray[0].text = null;
         textArray[1].text = null;
-        textArray[2].text = null;
     }
 
     private void Update()
     {
-        ShowHUD();
-        if (Input.GetKey("escape")) Application.Quit();
+//        ShowHUD();
+        if (Input.GetKey("escape"))
+        {
+            isPause = true;
+            Time.timeScale = 0.0f;
+        }
+    }
+
+    private void OnGUI()
+    {
+        if (isPause)
+        {
+            GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 100, 300, 50), "Pause!");
+
+            if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2, 300, 100), "Do you want to continue?"))
+            {
+                isPause = false;
+                Time.timeScale = 1.0f;
+            }
+            if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 + 150, 300, 100), "Do you want to quit?"))
+            {
+                isPause = false;
+                InitText();
+                transform.parent.GetComponentInChildren<StatManager>().Init();
+                transform.parent.GetComponentInChildren<LevelManager>().Init();
+                transform.parent.GetComponentInChildren<LevelManager>().CurrentScreen();
+            }
+        }
     }
 }

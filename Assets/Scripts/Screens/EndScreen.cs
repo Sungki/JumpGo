@@ -8,7 +8,10 @@ public class EndScreen : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            Toolbox.GetInstance().GetManager<LevelManager>().NextLevel();
+            Toolbox.GetInstance().GetManager<GameManager>().InitText();
+            Toolbox.GetInstance().GetManager<StatManager>().Init();
+            Toolbox.GetInstance().GetManager<LevelManager>().Init();
+            Toolbox.GetInstance().GetManager<LevelManager>().CurrentScreen();
         }
     }
 }

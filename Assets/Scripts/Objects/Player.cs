@@ -12,6 +12,7 @@ public class Player : MovableObject
     {
         rb = GetComponent<Rigidbody2D>();
         Toolbox.GetInstance().GetManager<GameManager>().SetRespawnPos(this.transform.position);
+        Toolbox.GetInstance().GetManager<GameManager>().ShowHUD();
     }
 
     private void Update()

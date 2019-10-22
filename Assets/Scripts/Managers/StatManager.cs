@@ -13,7 +13,7 @@ public class StatManager : MonoBehaviour
         Init();
     }
 
-    private void Init()
+    public void Init()
     {
         playerLife = 3;
         playerCoin = 0;
@@ -57,13 +57,16 @@ public class StatManager : MonoBehaviour
 
             if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2, 300, 100), "Do you want to Restart?"))
             {
+                allDied = false;
                 Init();
                 transform.parent.GetComponentInChildren<LevelManager>().Init();
                 transform.parent.GetComponentInChildren<LevelManager>().NextLevel();
             }
             if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 + 150, 300, 100), "Do you want to end?"))
             {
+                allDied = false;
                 transform.parent.GetComponentInChildren<LevelManager>().GotoScreen("EndScreen");
+                transform.parent.GetComponentInChildren<GameManager>().ShowSummary();
             }
         }
     }
