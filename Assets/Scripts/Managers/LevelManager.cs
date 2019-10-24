@@ -14,6 +14,12 @@ public class LevelManager : MonoBehaviour
     GameObject blueGuyPrefab;
     GameObject playerPrefab;
 
+    public bool IsLevelScene()
+    {
+        if (currentState == SceneState.StartScreen || currentState == SceneState.EndScreen) return false;
+        else return true;
+    }
+
     private void Awake()
     {
         redGuyPrefab = Resources.Load<GameObject>("RedGuy");
