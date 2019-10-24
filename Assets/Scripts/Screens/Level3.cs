@@ -13,14 +13,16 @@ public class Level3 : SceneBase
         initPos.Add(new Vector3(-2.2f, -2.4f, 0));
         initPos.Add(new Vector3(4.5f, -2.4f, 0));
         initPos.Add(new Vector3(27.3f, 1.6f, 0));
-        //        initPos.Add(new Vector3(29.1f, -2.4f, 0));
-        //        initPos.Add(new Vector3(35.5f, -2.4f, 0));
+        initPos.Add(new Vector3(29.1f, -2.4f, 0));
+        initPos.Add(new Vector3(35.5f, -2.4f, 0));
     }
 
     public override void SetPrefab(GameObject _player, GameObject _red, GameObject _blue)
     {
         objPrefab.Add(_player);
         objPrefab.Add(_red);
+        objPrefab.Add(_blue);
+        objPrefab.Add(_blue);
         objPrefab.Add(_blue);
     }
 
@@ -34,7 +36,7 @@ public class Level3 : SceneBase
 
     public override void CreateLevel()
     {
-        for (int i = 0; i < objPrefab.Count; i++)
+        for (int i = 0; i < initPos.Count; i++)
         {
             var go = Instantiate(objPrefab[i], initPos[i], Quaternion.identity);
             obj.Add(go);

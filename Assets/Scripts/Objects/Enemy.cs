@@ -22,7 +22,7 @@ public class Enemy : MovableObject, IFSM
 
     void Awake()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
     }
 
