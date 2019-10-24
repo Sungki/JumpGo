@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        if(!player) player = GameObject.Find("Player");
+        if(!player) player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = respawnPosition;
         player.GetComponent<Player>().speedUp = 1.0f;
     }
@@ -58,11 +58,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-//        ShowHUD();
         if (Input.GetKey("escape"))
         {
             isPause = true;
             Time.timeScale = 0.0f;
+//            transform.parent.GetComponentInChildren<LevelManager>().CapturePos();
+//            transform.parent.GetComponentInChildren<LevelManager>().GotoScreen("PauseScreen");
         }
     }
 
@@ -70,16 +71,19 @@ public class GameManager : MonoBehaviour
     {
         if (isPause)
         {
-            GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 100, 300, 50), "Pause!");
+            GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 100, 300, 50), "Pause!!");
 
             if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2, 300, 100), "Do you want to continue?"))
             {
                 isPause = false;
                 Time.timeScale = 1.0f;
+//                transform.parent.GetComponentInChildren<LevelManager>().SetPos();
+//                transform.parent.GetComponentInChildren<LevelManager>().CurrentScreen();
             }
             if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 + 150, 300, 100), "Do you want to quit?"))
             {
                 isPause = false;
+                Time.timeScale = 1.0f;
                 InitText();
                 transform.parent.GetComponentInChildren<StatManager>().Init();
                 transform.parent.GetComponentInChildren<LevelManager>().Init();

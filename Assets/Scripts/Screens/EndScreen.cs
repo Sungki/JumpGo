@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class EndScreen : MonoBehaviour
 {
+    private void Start()
+    {
+        Toolbox.GetInstance().GetManager<GameManager>().ShowSummary();
+    }
+
     private void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.GetButtonDown("Jump"))
         {
             Toolbox.GetInstance().GetManager<GameManager>().InitText();
             Toolbox.GetInstance().GetManager<StatManager>().Init();
