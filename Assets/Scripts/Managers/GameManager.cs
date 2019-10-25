@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
 
     public void ShowHUD()
     {
-        textArray[0].transform.position = new Vector2(Screen.width / 2 - 100, Screen.height - 50);
-        textArray[1].transform.position = new Vector2(Screen.width / 2 + 250, Screen.height - 50);
+        textArray[0].transform.position = new Vector2(Screen.width / 2 - 150, Screen.height - 150);
+        textArray[1].transform.position = new Vector2(Screen.width / 2 + 300, Screen.height - 150);
 
         textArray[0].text = transform.parent.GetComponentInChildren<StatManager>().GetPlayerLife();
         textArray[1].text = transform.parent.GetComponentInChildren<StatManager>().GetScore();
@@ -43,8 +43,8 @@ public class GameManager : MonoBehaviour
 
     public void ShowSummary()
     {
-        textArray[0].transform.position = new Vector2(Screen.width / 2 - 100, Screen.height - 500);
-        textArray[1].transform.position = new Vector2(Screen.width / 2 + 250, Screen.height - 500);
+        textArray[0].transform.position = new Vector2(Screen.width / 2 - 150, Screen.height - 500);
+        textArray[1].transform.position = new Vector2(Screen.width / 2 + 300, Screen.height - 500);
 
         textArray[0].text = transform.parent.GetComponentInChildren<StatManager>().GetPlayerLife();
         textArray[1].text = transform.parent.GetComponentInChildren<StatManager>().GetScore();
@@ -62,8 +62,6 @@ public class GameManager : MonoBehaviour
         {
             isPause = true;
             Time.timeScale = 0.0f;
-//            transform.parent.GetComponentInChildren<LevelManager>().CapturePos();
-//            transform.parent.GetComponentInChildren<LevelManager>().GotoScreen("PauseScreen");
         }
     }
 
@@ -77,8 +75,6 @@ public class GameManager : MonoBehaviour
             {
                 isPause = false;
                 Time.timeScale = 1.0f;
-//                transform.parent.GetComponentInChildren<LevelManager>().SetPos();
-//                transform.parent.GetComponentInChildren<LevelManager>().CurrentScreen();
             }
             if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 + 150, 300, 100), "Do you want to quit?"))
             {

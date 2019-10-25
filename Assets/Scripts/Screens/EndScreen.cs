@@ -11,7 +11,7 @@ public class EndScreen : MonoBehaviour
 
     private void Update()
     {
-        if (Input.anyKey)
+        if (Input.GetButtonDown("Jump"))
         {
             Toolbox.GetInstance().GetManager<GameManager>().InitText();
             Toolbox.GetInstance().GetManager<StatManager>().Init();

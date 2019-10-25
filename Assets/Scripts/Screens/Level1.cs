@@ -5,8 +5,7 @@ using UnityEngine;
 public class Level1 : SceneBase
 {
     private List<GameObject> objPrefab = new List<GameObject>();
-    public List<GameObject> obj = new List<GameObject>();
-    public List<Vector3> initPos = new List<Vector3>();
+    private List<Vector3> initPos = new List<Vector3>();
 
     private void Awake()
     {
@@ -34,18 +33,7 @@ public class Level1 : SceneBase
     {
         for (int i = 0; i < objPrefab.Count; i++)
         {
-            var go = Instantiate(objPrefab[i], initPos[i], Quaternion.identity);
-            obj.Add(go);
+            Instantiate(objPrefab[i], initPos[i], Quaternion.identity);
         }
-    }
-
-    public override List<Vector3> GetPositions()
-    {
-        List<Vector3> res = new List<Vector3>();
-
-        for (int i = 0; i < obj.Count; i++)
-            res.Add(obj[i].transform.position);
-
-        return res;
     }
 }

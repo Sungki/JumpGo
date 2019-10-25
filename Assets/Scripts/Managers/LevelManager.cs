@@ -8,7 +8,6 @@ public class LevelManager : MonoBehaviour
 {
     private SceneState currentState = 0;
     Stack<GameObject> sceneStack = new Stack<GameObject>();
-    List<Vector3> temporaryPos = new List<Vector3>();
 
     GameObject redGuyPrefab;
     GameObject blueGuyPrefab;
@@ -16,8 +15,10 @@ public class LevelManager : MonoBehaviour
 
     public bool IsLevelScene()
     {
-        if (currentState == SceneState.StartScreen || currentState == SceneState.EndScreen) return false;
-        else return true;
+        if (currentState == SceneState.StartScreen || currentState == SceneState.EndScreen)
+            return false;
+        else
+            return true;
     }
 
     private void Awake()
@@ -77,16 +78,7 @@ public class LevelManager : MonoBehaviour
 
         sceneStack.Peek().transform.parent = this.gameObject.transform;
         sceneStack.Peek().AddComponent<T>().SetPrefab(playerPrefab, redGuyPrefab, blueGuyPrefab);
-
-        if(temporaryPos.Count==0)
-        {
-            sceneStack.Peek().GetComponent<T>().CreateLevel();
-        }
-        else
-        {
-            sceneStack.Peek().GetComponent<T>().CreateLevel(temporaryPos);
-            temporaryPos.Clear();
-        }
+        sceneStack.Peek().GetComponent<T>().CreateLevel();
     }
 
     private void PushScene(GameObject go)
@@ -99,24 +91,6 @@ public class LevelManager : MonoBehaviour
         sceneStack.Push(go);
     }
 
-    public void CapturePos()
-    {
-        switch (currentState)
-        {
-            case SceneState.Level1:
-                temporaryPos = new List<Vector3>(sceneStack.Peek().GetComponent<Level1>().GetPositions());
-                break;
-            case SceneState.Level2:
-                temporaryPos = new List<Vector3>(sceneStack.Peek().GetComponent<Level2>().GetPositions());
-                break;
-            case SceneState.Level3:
-                temporaryPos = new List<Vector3>(sceneStack.Peek().GetComponent<Level3>().GetPositions());
-                break;
-            default:
-                break;
-        }
-    }
-
     public void CurrentScreen()
     {
         StartCoroutine(LoadScene());
@@ -124,6 +98,7 @@ public class LevelManager : MonoBehaviour
 
     public void GotoScreen(string screen)
     {
+        if(screen == "EndScreen") currentState = SceneState.EndScreen;
         SceneManager.LoadScene(screen);
     }
 }
